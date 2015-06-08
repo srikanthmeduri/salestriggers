@@ -13,9 +13,7 @@ conn.login('imran@megaki.com.dev', 'numMeg208uUspCDudU5t5UMjNh51ar0B', function(
             return console.error(err);
         }
         var records = res.records;
-        console.log(records.length);
         var urls = [];
-        // console.dir(records);
         records.forEach(function(record) {
             var website = record.Website;
             if (website) {
@@ -24,9 +22,6 @@ conn.login('imran@megaki.com.dev', 'numMeg208uUspCDudU5t5UMjNh51ar0B', function(
                 urls.push(url);
             }
         });
-        console.log('=============');
-        console.log(urls);
-        console.log('=============');
         async.eachLimit(urls, 10, makeRequest, function(err) {
             if (err) throw err;
         });
@@ -43,7 +38,6 @@ function makeRequest(url, callback) {
                 console.log(url + ' ------ not a customer');
             }
         } else {
-            //console.log(error);
             console.log(url + ' ------ error making request to the url');
         }
         callback();
